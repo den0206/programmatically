@@ -15,13 +15,35 @@ class ConvesationsController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       configureUI()
+        configureNav()
+        configureUI()
         
     }
     
-    private func configureUI() {
+    //MARK: - UI
+    
+    private func configureNav() {
+        
+        let appearence = UINavigationBarAppearance()
+        appearence.configureWithOpaqueBackground()
+        appearence.largeTitleTextAttributes = [.foregroundColor : UIColor.white]
+        appearence.backgroundColor = .green
+        
+        
+        navigationController?.navigationBar.standardAppearance = appearence
+        navigationController?.navigationBar.compactAppearance = appearence
+        navigationController?.navigationBar.scrollEdgeAppearance = appearence
+        
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Message"
+        
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.isTranslucent = true
+        
+        navigationController?.navigationBar.overrideUserInterfaceStyle = .dark
+    }
+    
+    private func configureUI() {
         
         view.backgroundColor = .white
         
