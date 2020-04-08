@@ -7,15 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A1293E9243E07FC00DA8C17 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1293E8243E07FC00DA8C17 /* Extensions.swift */; };
 		3A9DB581243CB36400EAAD4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9DB580243CB36400EAAD4A /* AppDelegate.swift */; };
 		3A9DB583243CB36400EAAD4A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9DB582243CB36400EAAD4A /* SceneDelegate.swift */; };
 		3A9DB585243CB36400EAAD4A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9DB584243CB36400EAAD4A /* ViewController.swift */; };
 		3A9DB58A243CB36500EAAD4A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A9DB589243CB36500EAAD4A /* Assets.xcassets */; };
 		3A9DB58D243CB36500EAAD4A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A9DB58B243CB36500EAAD4A /* LaunchScreen.storyboard */; };
 		3A9DB59A243CB40F00EAAD4A /* ConvesationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9DB599243CB40F00EAAD4A /* ConvesationsController.swift */; };
+		3AB915AF243E0558003A2A29 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB915AE243E0558003A2A29 /* LoginController.swift */; };
+		3AB915B1243E0564003A2A29 /* SignupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB915B0243E0564003A2A29 /* SignupController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A1293E8243E07FC00DA8C17 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		3A9DB57D243CB36400EAAD4A /* programmatically.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = programmatically.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A9DB580243CB36400EAAD4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A9DB582243CB36400EAAD4A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +28,8 @@
 		3A9DB58C243CB36500EAAD4A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3A9DB58E243CB36500EAAD4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A9DB599243CB40F00EAAD4A /* ConvesationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvesationsController.swift; sourceTree = "<group>"; };
+		3AB915AE243E0558003A2A29 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		3AB915B0243E0564003A2A29 /* SignupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +43,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A1293E7243E07EA00DA8C17 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				3A1293E8243E07FC00DA8C17 /* Extensions.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		3A9DB574243CB36400EAAD4A = {
 			isa = PBXGroup;
 			children = (
@@ -61,6 +75,7 @@
 				3A9DB595243CB3DE00EAAD4A /* View */,
 				3A9DB594243CB3C900EAAD4A /* Controller */,
 				3A9DB598243CB3F400EAAD4A /* API */,
+				3A1293E7243E07EA00DA8C17 /* Helpers */,
 				3A9DB580243CB36400EAAD4A /* AppDelegate.swift */,
 				3A9DB582243CB36400EAAD4A /* SceneDelegate.swift */,
 				3A9DB584243CB36400EAAD4A /* ViewController.swift */,
@@ -74,6 +89,7 @@
 		3A9DB594243CB3C900EAAD4A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				3AB915AD243E0542003A2A29 /* Auth */,
 				3A9DB599243CB40F00EAAD4A /* ConvesationsController.swift */,
 			);
 			path = Controller;
@@ -105,6 +121,15 @@
 			children = (
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		3AB915AD243E0542003A2A29 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				3AB915AE243E0558003A2A29 /* LoginController.swift */,
+				3AB915B0243E0564003A2A29 /* SignupController.swift */,
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,6 +206,9 @@
 				3A9DB59A243CB40F00EAAD4A /* ConvesationsController.swift in Sources */,
 				3A9DB581243CB36400EAAD4A /* AppDelegate.swift in Sources */,
 				3A9DB583243CB36400EAAD4A /* SceneDelegate.swift in Sources */,
+				3AB915B1243E0564003A2A29 /* SignupController.swift in Sources */,
+				3AB915AF243E0558003A2A29 /* LoginController.swift in Sources */,
+				3A1293E9243E07FC00DA8C17 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

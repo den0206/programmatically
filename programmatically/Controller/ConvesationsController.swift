@@ -8,7 +8,11 @@
 
 import UIKit
 
+private let reuseIdentifer = "Cell"
+
 class ConvesationsController : UIViewController {
+    
+    private let tableView = UITableView()
     
     //MARK: - life cycle
     
@@ -16,7 +20,9 @@ class ConvesationsController : UIViewController {
         super.viewDidLoad()
         
         configureNav()
+        convfigureTableview()
         configureUI()
+        
         
     }
     
@@ -52,11 +58,44 @@ class ConvesationsController : UIViewController {
         
     }
     
+    private func convfigureTableview() {
+        tableView.backgroundColor = .white
+        tableView.rowHeight = 80
+        tableView.tableFooterView = UIView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifer)
+        view.addSubview(tableView)
+        tableView.frame = view.frame
+    }
+    
     //MARK: - Actions
     
     @objc func showProfile(_ sender : UIBarButtonItem) {
         
         print("Show profile")
     }
+    
+}
+
+extension ConvesationsController : UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 6
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifer, for: indexPath)
+        
+        cell.detailTextLabel?.text = "Test"
+        
+        return cell
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath.row)
+    }
+    
     
 }
