@@ -11,6 +11,7 @@ import UIKit
 
 class LoginController : UIViewController {
     
+    private var viewModel = LoginViewModel()
     //MARK: - Parts
     
     private let iconImage : UIImageView = {
@@ -44,8 +45,22 @@ class LoginController : UIViewController {
         button.layer.cornerRadius = 5
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         button.backgroundColor = .systemGreen
+        button.titleLabel?.textColor = .white
+        button.isEnabled = false
         return button
     }()
+    
+   let dontHaveAccountButton : UIButton  = {
+       let button = UIButton(type: .system)
+       let attributeTitle = NSMutableAttributedString(string: "アカウントを持っていませんか？ ", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
+       
+       attributeTitle.append(NSMutableAttributedString(string: "Sign up", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 16), NSMutableAttributedString.Key.foregroundColor : UIColor.lightGray]))
+       
+       button.setAttributedTitle(attributeTitle, for: .normal)
+       button.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
+       return button
+       
+   }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,18 +88,29 @@ class LoginController : UIViewController {
         view.addSubview(stack)
         stack.anchor(top : iconImage.bottomAnchor,left: view.leftAnchor, right: view.rightAnchor, paddingTop: 32, paddingLeft: 32,paddingRight: 32)
         
+        view.addSubview(dontHaveAccountButton)
         
+        dontHaveAccountButton.centerX(inView: view)
+        dontHaveAccountButton.anchor(bottom : view.safeAreaLayoutGuide.bottomAnchor,paddingBottom: 12)
+        
+        emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+
         
         
     }
     
-    func configureGradiantLayer() {
-        let gradient = CAGradientLayer()
-        gradient.colors = [UIColor.green.cgColor, UIColor.white.cgColor]
-        gradient.locations = [0.1]
-        view.layer.addSublayer(gradient)
-        gradient.frame = view.frame
+    func checkFormStatus() {
+        if viewModel.formIsValid {
+            loginButton.isEnabled = true
+            loginButton.backgroundColor = #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)
+        } else {
+            loginButton.isEnabled = false
+            loginButton.backgroundColor = .systemGreen
+        }
     }
+    
+    
     
     //MARK: - Helpers
     private func inputContainerView(image : UIImage?, textField : UITextField? = nil) -> UIView {
@@ -127,6 +153,28 @@ class LoginController : UIViewController {
         tf.autocapitalizationType = .none
         
         return tf
+    }
+    
+    //MARK: - Actions
+    
+    @objc func handleSignUp() {
+        
+        let signUpVC = SignupController()
+        navigationController?.pushViewController(signUpVC, animated: true)
+    }
+    
+    @objc func textDidChange(_ sender : UITextField) {
+       
+        switch sender {
+        case emailTextField:
+            viewModel.email = sender.text
+        case passwordTextField :
+            viewModel.password = sender.text
+        default:
+            return
+        }
+        
+        checkFormStatus()
     }
     
     

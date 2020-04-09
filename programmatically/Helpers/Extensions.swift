@@ -80,3 +80,13 @@ extension UIView {
         widthAnchor.constraint(equalToConstant: width).isActive = true
     }
 }
+
+extension UIViewController {
+    func configureGradiantLayer() {
+           let gradient = CAGradientLayer()
+           gradient.colors = [UIColor.green.cgColor, UIColor.white.cgColor]
+           gradient.locations = [0.1]
+           view.layer.addSublayer(gradient)
+           gradient.frame = view.frame
+    }
+}

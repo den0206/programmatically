@@ -16,6 +16,7 @@
 		3A9DB59A243CB40F00EAAD4A /* ConvesationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9DB599243CB40F00EAAD4A /* ConvesationsController.swift */; };
 		3AB915AF243E0558003A2A29 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB915AE243E0558003A2A29 /* LoginController.swift */; };
 		3AB915B1243E0564003A2A29 /* SignupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB915B0243E0564003A2A29 /* SignupController.swift */; };
+		3AF05E6C243F5DB100E9AAF3 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF05E6B243F5DB100E9AAF3 /* LoginViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		3A9DB599243CB40F00EAAD4A /* ConvesationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvesationsController.swift; sourceTree = "<group>"; };
 		3AB915AE243E0558003A2A29 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		3AB915B0243E0564003A2A29 /* SignupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupController.swift; sourceTree = "<group>"; };
+		3AF05E6B243F5DB100E9AAF3 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 		3A9DB597243CB3E900EAAD4A /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				3AF05E6B243F5DB100E9AAF3 /* LoginViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -206,6 +209,7 @@
 				3A9DB59A243CB40F00EAAD4A /* ConvesationsController.swift in Sources */,
 				3A9DB581243CB36400EAAD4A /* AppDelegate.swift in Sources */,
 				3A9DB583243CB36400EAAD4A /* SceneDelegate.swift in Sources */,
+				3AF05E6C243F5DB100E9AAF3 /* LoginViewModel.swift in Sources */,
 				3AB915B1243E0564003A2A29 /* SignupController.swift in Sources */,
 				3AB915AF243E0558003A2A29 /* LoginController.swift in Sources */,
 				3A1293E9243E07FC00DA8C17 /* Extensions.swift in Sources */,
