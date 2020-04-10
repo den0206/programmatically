@@ -7,6 +7,8 @@
 //
 
  import UIKit
+ import Firebase
+ 
  protocol AuthentificationControllerProtocol {
     func checkFormStatus()
  }
@@ -14,8 +16,9 @@
 
  class SignupController : UIViewController {
     
-    var selectedIMage : UIImage?
     private var viewModel = SignupViewModel()
+    
+    var selectedImage : UIImage?
     
     //MARK: - Parts
     
@@ -74,6 +77,7 @@
          button.layer.cornerRadius = 5
          button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
          button.backgroundColor = .systemGreen
+        button.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
          return button
      }()
      
@@ -94,6 +98,7 @@
          super.viewDidLoad()
          
         configureUI()
+        configureNotificationObserver()
         
      }
     
@@ -116,14 +121,14 @@
         alreadyHaveAccountButton.centerX(inView: view)
         alreadyHaveAccountButton.anchor(bottom : view.safeAreaLayoutGuide.bottomAnchor,paddingBottom: 12)
         
+       
+    }
+    
+    func configureNotificationObserver() {
         emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         fullnameTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         usernameTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
-        
-    }
-    
-    func configureNotificationObserver() {
         
     }
     
@@ -134,6 +139,55 @@
         imagePickerController.delegate = self
         present(imagePickerController, animated: true, completion: nil)
     }
+    
+    @objc func handleSignUp() {
+        guard let email = emailTextField.text else {return}
+        guard let fullname = fullnameTextField.text else {return}
+        guard let username = usernameTextField.text?.lowercased() else {return}
+        guard let password = passwordTextField.text else {return}
+        
+        guard let profileImage = selectedImage else {return}
+        
+        guard let imageData = profileImage.jpegData(compressionQuality: 0.3) else {return}
+        
+        let filename = UUID().uuidString
+        let ref = Storage.storage().reference(withPath: "ProfileImage/\(filename)")
+        
+        ref.putData(imageData, metadata: nil) { (meta, error) in
+            
+            if error != nil {
+                print(error!.localizedDescription)
+                return
+            }
+            
+            ref.downloadURL { (url, error) in
+                
+                guard let profileImageUrl = url?.absoluteString else {return}
+                
+                Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+                    
+                    if error != nil {
+                        print(error!.localizedDescription)
+                        return
+                    }
+                    
+                    guard let uid = result?.user.uid else {return}
+                    
+                    let values = [kEMAIL : email,
+                                  kFULLNAME : fullname,
+                                  kUSERNAME : username,
+                                  kAVATAR : profileImageUrl,
+                                  kUID : uid ] as [String : Any]
+                    
+                    print(values)
+                    
+                    firebaseReference(.User).document(uid).setData(values)
+                    
+                }
+            }
+        }
+    }
+    
     
     @objc func handleLogin() {
         navigationController?.popViewController(animated: true)
@@ -195,6 +249,7 @@
         tf.borderStyle = .none
         tf.font = UIFont.systemFont(ofSize: 16)
         tf.textColor = .black
+        tf.autocorrectionType = .no
         tf.keyboardAppearance = .dark
         tf.isSecureTextEntry = isSecureType
         tf.attributedPlaceholder = NSAttributedString(string: withPlaceholder, attributes: [NSAttributedString.Key.foregroundColor : UIColor.black])
@@ -213,6 +268,7 @@
         plusPhotoButton.layer.borderColor = UIColor(white: 1, alpha: 0.7).cgColor
         plusPhotoButton.layer.borderWidth = 3.0
         plusPhotoButton.layer.cornerRadius = 200 / 2
+        self.selectedImage = image
         
         
         dismiss(animated: true, completion: nil)
