@@ -7,9 +7,15 @@
 //
 
  import UIKit
+ protocol AuthentificationControllerProtocol {
+    func checkFormStatus()
+ }
 
 
  class SignupController : UIViewController {
+    
+    var selectedIMage : UIImage?
+    private var viewModel = SignupViewModel()
     
     //MARK: - Parts
     
@@ -19,6 +25,7 @@
         button.setDimensions(height: 200, width: 200)
         button.addTarget(self, action: #selector(handlePlusButton), for: .touchUpInside)
         button.tintColor = .white
+        button.clipsToBounds = true
 
         return button
     }()
@@ -109,19 +116,48 @@
         alreadyHaveAccountButton.centerX(inView: view)
         alreadyHaveAccountButton.anchor(bottom : view.safeAreaLayoutGuide.bottomAnchor,paddingBottom: 12)
         
+        emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        fullnameTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        usernameTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        
+    }
+    
+    func configureNotificationObserver() {
         
     }
     
     //MARK: - Actions
     
     @objc func handlePlusButton() {
-        print("Phoro")
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        present(imagePickerController, animated: true, completion: nil)
     }
     
     @objc func handleLogin() {
         navigationController?.popViewController(animated: true)
     }
-     
+    
+    @objc func textDidChange(_ sender : UITextField) {
+          
+        switch sender {
+        case emailTextField:
+            viewModel.email = sender.text
+        case passwordTextField :
+            viewModel.password = sender.text
+        case usernameTextField :
+            viewModel.username = sender.text
+        case fullnameTextField :
+            viewModel.fullname = sender.text
+        default:
+            return
+        }
+        
+           checkFormStatus()
+       }
+    
+    
  }
  
  extension SignupController {
@@ -166,4 +202,34 @@
         
         return tf
     }
+ }
+
+ extension SignupController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        let image = info[.originalImage] as? UIImage
+        plusPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+        plusPhotoButton.layer.borderColor = UIColor(white: 1, alpha: 0.7).cgColor
+        plusPhotoButton.layer.borderWidth = 3.0
+        plusPhotoButton.layer.cornerRadius = 200 / 2
+        
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+ }
+ 
+ extension SignupController : AuthentificationControllerProtocol {
+    
+    func checkFormStatus() {
+        if viewModel.formIsValid {
+            signUpButton.isEnabled = true
+            signUpButton.backgroundColor = #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)
+        } else {
+            signUpButton.isEnabled = false
+            signUpButton.backgroundColor = .systemGreen
+        }
+    }
+    
  }
