@@ -11,10 +11,17 @@ private let reuseIdentifer = "UserCell"
 
 class NewMessagesController : UITableViewController {
     
+    private var users = [User]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureUI()
+        fetchUsers()
         
     }
     
@@ -28,27 +35,16 @@ class NewMessagesController : UITableViewController {
         tableView.register(UserCell.self, forCellReuseIdentifier: reuseIdentifer)
     }
     
+    //MARK: - API
     
-    private func configureNav() {
-        
-        let appearence = UINavigationBarAppearance()
-        appearence.configureWithOpaqueBackground()
-        appearence.largeTitleTextAttributes = [.foregroundColor : UIColor.white]
-        appearence.backgroundColor = .green
-        
-        
-        navigationController?.navigationBar.standardAppearance = appearence
-        navigationController?.navigationBar.compactAppearance = appearence
-        navigationController?.navigationBar.scrollEdgeAppearance = appearence
-        
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.title = "Message"
-        
-        navigationController?.navigationBar.tintColor = .white
-        navigationController?.navigationBar.isTranslucent = true
-        
-        navigationController?.navigationBar.overrideUserInterfaceStyle = .dark
+    func fetchUsers() {
+        Service.fetchUsers { (users) in
+            
+            self.users = users
+            
+        }
     }
+    
     
     //MARK: - Actions
     
@@ -59,13 +55,15 @@ class NewMessagesController : UITableViewController {
 
 extension NewMessagesController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return users.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifer, for: indexPath) as! UserCell
         cell.textLabel?.text = "Test"
+        
+        cell.user = users[indexPath.row]
         return cell
     }
 }

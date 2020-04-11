@@ -7,8 +7,15 @@
 //
 
 import UIKit
+import SDWebImage
 
 class UserCell: UITableViewCell {
+    
+    var user : User? {
+        didSet {
+            configure()
+        }
+    }
     
     //MARK: - Parts
     
@@ -54,5 +61,15 @@ class UserCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func configure() {
+        guard let user = user else {return}
+        fullnameLabel.text = user.fullname
+        usernameLabel.text = user.username
+        
+        guard let url = URL(string: user.profileImage) else {return}
+        profileImageView.sd_setImage(with: url)
+        
     }
 }
