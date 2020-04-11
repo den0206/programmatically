@@ -130,6 +130,9 @@
         fullnameTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         usernameTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
     }
     
     //MARK: - Actions
@@ -150,18 +153,34 @@
         
         let credential = RegistrationCredentials(email: email, username: username, fullname: fullname, password: password, profileImage: profileImage)
         
+        showLoader(true, text: "Creating User...")
+        
         AuthService.shared.signUpUser(credential: credential) { (error) in
             if error != nil {
                 print(error!.localizedDescription)
+                self.showLoader(false)
                 return
             }
             
             
+            self.showLoader(false)
             self.dismiss(animated: true, completion: nil)
         }
         
         
        
+    }
+    
+    @objc func keyboardWillShow() {
+        if view.frame.origin.y == 0 {
+            self.view.frame.origin.y -= 88
+        }
+    }
+    @objc func keyboardWillHide() {
+        
+        if view.frame.origin.y != 0 {
+            view.frame.origin.y = 0
+        }
     }
     
     

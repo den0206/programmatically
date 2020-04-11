@@ -9,18 +9,30 @@
 import UIKit
 import Firebase
 
+
 private let reuseIdentifer = "Cell"
 
 class ConvesationsController : UIViewController {
     
     private let tableView = UITableView()
     
+    private let actionButton : UIButton = {
+        let button = UIButton(type: .system)
+        button.tintColor = .white
+        button.backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
+        button.setImage(UIImage(systemName: "plus"), for: .normal)
+        button.setDimensions(height: 56, width: 56)
+        button.layer.cornerRadius = 56 / 2
+        button.addTarget(self, action: #selector(handleNewChat), for: .touchUpInside)
+        return button
+    }()
+    
     //MARK: - life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureNav()
+        configureNav(title: "Message", preferLargeTitle: true)
         convfigureTableview()
         configureUI()
         
@@ -31,33 +43,16 @@ class ConvesationsController : UIViewController {
     
     //MARK: - UI
     
-    private func configureNav() {
-        
-        let appearence = UINavigationBarAppearance()
-        appearence.configureWithOpaqueBackground()
-        appearence.largeTitleTextAttributes = [.foregroundColor : UIColor.white]
-        appearence.backgroundColor = .green
-        
-        
-        navigationController?.navigationBar.standardAppearance = appearence
-        navigationController?.navigationBar.compactAppearance = appearence
-        navigationController?.navigationBar.scrollEdgeAppearance = appearence
-        
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.title = "Message"
-        
-        navigationController?.navigationBar.tintColor = .white
-        navigationController?.navigationBar.isTranslucent = true
-        
-        navigationController?.navigationBar.overrideUserInterfaceStyle = .dark
-    }
-    
     private func configureUI() {
         
         view.backgroundColor = .white
         
         let image = UIImage(systemName: "person.circle.fill")
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(showProfile(_ :)))
+        
+        view.addSubview(actionButton)
+        actionButton.anchor(bottom : view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor,paddingBottom: 16, paddingRight: 24)
+        
         
     }
     
@@ -78,6 +73,13 @@ class ConvesationsController : UIViewController {
     @objc func showProfile(_ sender : UIBarButtonItem) {
         
        logOut()
+    }
+    
+    @objc func handleNewChat() {
+        let newVC = NewMessagesController()
+        let nav = UINavigationController(rootViewController: newVC)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true, completion: nil)
     }
     
     //MARK: - API

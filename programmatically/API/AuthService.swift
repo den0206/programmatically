@@ -35,7 +35,7 @@ class AuthService {
         ref.putData(imageData, metadata: nil) { (meta, error) in
             
             if error != nil {
-                print(error!.localizedDescription)
+                completion!(error)
                 return
             }
             
@@ -46,7 +46,7 @@ class AuthService {
                 Auth.auth().createUser(withEmail: credential.email, password: credential.password) { (result, error) in
                     
                     if error != nil {
-                        print(error!.localizedDescription)
+                        completion!(error)
                         return
                     }
                     

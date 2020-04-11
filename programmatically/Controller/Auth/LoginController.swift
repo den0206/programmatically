@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 
 
+
 class LoginController : UIViewController {
     
     private var viewModel = LoginViewModel()
@@ -115,15 +116,20 @@ class LoginController : UIViewController {
     @objc func handleLogin() {
         guard let email = emailTextField.text else {return}
         guard let password = passwordTextField.text else {return}
-        
+       
+        showLoader(true)
         AuthService.shared.loginUser(email: email, password: password) { (result, error) in
             
             if error != nil {
                 print(error!.localizedDescription)
+                self.showLoader(false)
                 return
             }
             
-            self.dismiss(animated: true, completion: nil)
+            self.dismiss(animated: true, completion: {
+                self.showLoader(false)
+
+            })
         }
         
 
