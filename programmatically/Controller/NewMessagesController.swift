@@ -9,7 +9,13 @@
 import UIKit
 private let reuseIdentifer = "UserCell"
 
+protocol NewMessagesControllerDelegate : class {
+    func controller(_ controller : NewMessagesController, withUser : User)
+}
+
 class NewMessagesController : UITableViewController {
+    
+    weak var delegate : NewMessagesControllerDelegate?
     
     private var users = [User]() {
         didSet {
@@ -39,7 +45,6 @@ class NewMessagesController : UITableViewController {
     
     func fetchUsers() {
         Service.fetchUsers { (users) in
-            
             self.users = users
             
         }
@@ -65,5 +70,10 @@ extension NewMessagesController {
         
         cell.user = users[indexPath.row]
         return cell
+    }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        delegate?.controller(self, withUser: users[indexPath.row])
+    
     }
 }

@@ -32,9 +32,7 @@ class ConvesationsController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureNav(title: "Message", preferLargeTitle: true)
-        convfigureTableview()
-        configureUI()
+        
         
         authenticateUser()
         
@@ -77,6 +75,8 @@ class ConvesationsController : UIViewController {
     
     @objc func handleNewChat() {
         let newVC = NewMessagesController()
+        newVC.delegate = self
+        
         let nav = UINavigationController(rootViewController: newVC)
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true, completion: nil)
@@ -96,7 +96,9 @@ class ConvesationsController : UIViewController {
             }
 
         } else {
-            print("Yes")
+            configureNav(title: "Message", preferLargeTitle: true)
+            convfigureTableview()
+            configureUI()
 
         }
     }
@@ -134,6 +136,19 @@ extension ConvesationsController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
+    }
+    
+    
+}
+
+extension ConvesationsController : NewMessagesControllerDelegate {
+    func controller(_ controller: NewMessagesController, withUser user: User) {
+        
+        controller.dismiss(animated: true, completion: nil)
+        
+        let chatVC = ChatController(user: user)
+        navigationController?.pushViewController(chatVC, animated: true)
+        
     }
     
     
