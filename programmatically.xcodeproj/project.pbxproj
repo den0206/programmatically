@@ -15,6 +15,7 @@
 		3A45A1932440A22E007E6F2B /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A45A1922440A22E007E6F2B /* SignupViewModel.swift */; };
 		3A56C1C82441E99900CFF2F6 /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A56C1C72441E99900CFF2F6 /* ChatController.swift */; };
 		3A56C1CA2441EF1B00CFF2F6 /* CustomInputAccesaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A56C1C92441EF1B00CFF2F6 /* CustomInputAccesaryView.swift */; };
+		3A56C1CC2442191B00CFF2F6 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A56C1CB2442191B00CFF2F6 /* ChatCell.swift */; };
 		3A9DB581243CB36400EAAD4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9DB580243CB36400EAAD4A /* AppDelegate.swift */; };
 		3A9DB583243CB36400EAAD4A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9DB582243CB36400EAAD4A /* SceneDelegate.swift */; };
 		3A9DB585243CB36400EAAD4A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9DB584243CB36400EAAD4A /* ViewController.swift */; };
@@ -40,6 +41,7 @@
 		3A45A1922440A22E007E6F2B /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
 		3A56C1C72441E99900CFF2F6 /* ChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
 		3A56C1C92441EF1B00CFF2F6 /* CustomInputAccesaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputAccesaryView.swift; sourceTree = "<group>"; };
+		3A56C1CB2442191B00CFF2F6 /* ChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
 		3A9DB57D243CB36400EAAD4A /* programmatically.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = programmatically.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A9DB580243CB36400EAAD4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A9DB582243CB36400EAAD4A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 			children = (
 				3AE476F4244190E60059F04F /* UserCell.swift */,
 				3A56C1C92441EF1B00CFF2F6 /* CustomInputAccesaryView.swift */,
+				3A56C1CB2442191B00CFF2F6 /* ChatCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				3AE476F324418C2D0059F04F /* NewMessagesController.swift in Sources */,
 				3A45A1932440A22E007E6F2B /* SignupViewModel.swift in Sources */,
 				3A3CCDCC2440C1A1005A6F76 /* Constracts.swift in Sources */,
+				3A56C1CC2442191B00CFF2F6 /* ChatCell.swift in Sources */,
 				3A3CCDCE2440C26E005A6F76 /* FIrestoreReference.swift in Sources */,
 				3AE476F1244179680059F04F /* AuthService.swift in Sources */,
 				3A9DB585243CB36400EAAD4A /* ViewController.swift in Sources */,
