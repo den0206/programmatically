@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 private let reuseIdentifer = "Cell"
 
@@ -22,6 +23,8 @@ class ConvesationsController : UIViewController {
         configureNav()
         convfigureTableview()
         configureUI()
+        
+        authenticateUser()
         
         
     }
@@ -74,7 +77,41 @@ class ConvesationsController : UIViewController {
     
     @objc func showProfile(_ sender : UIBarButtonItem) {
         
-        print("Show profile")
+       logOut()
+    }
+    
+    //MARK: - API
+    
+    func authenticateUser() {
+        
+        if Auth.auth().currentUser == nil {
+            
+            DispatchQueue.main.async {
+                let loginVC = LoginController()
+                let nav = UINavigationController(rootViewController: loginVC)
+                nav.modalPresentationStyle = .fullScreen
+                self.present(nav, animated: true, completion: nil)
+            }
+
+        } else {
+            print("Yes")
+
+        }
+    }
+    
+    func logOut() {
+        do {
+            try Auth.auth().signOut()
+            
+            DispatchQueue.main.async {
+                let loginVC = LoginController()
+                let nav = UINavigationController(rootViewController: loginVC)
+                nav.modalPresentationStyle = .fullScreen
+                self.present(nav, animated: true, completion: nil)
+            }
+        } catch {
+            print("Can7T signout")
+        }
     }
     
 }

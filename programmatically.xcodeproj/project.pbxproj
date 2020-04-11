@@ -21,6 +21,7 @@
 		3A9DB59A243CB40F00EAAD4A /* ConvesationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9DB599243CB40F00EAAD4A /* ConvesationsController.swift */; };
 		3AB915AF243E0558003A2A29 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB915AE243E0558003A2A29 /* LoginController.swift */; };
 		3AB915B1243E0564003A2A29 /* SignupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB915B0243E0564003A2A29 /* SignupController.swift */; };
+		3AE476F1244179680059F04F /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE476F0244179680059F04F /* AuthService.swift */; };
 		3AF05E6C243F5DB100E9AAF3 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF05E6B243F5DB100E9AAF3 /* LoginViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 		3A9DB599243CB40F00EAAD4A /* ConvesationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvesationsController.swift; sourceTree = "<group>"; };
 		3AB915AE243E0558003A2A29 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		3AB915B0243E0564003A2A29 /* SignupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupController.swift; sourceTree = "<group>"; };
+		3AE476F0244179680059F04F /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		3AF05E6B243F5DB100E9AAF3 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		D77154D4FF0836810244D1C0 /* Pods-programmatically.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-programmatically.debug.xcconfig"; path = "Target Support Files/Pods-programmatically/Pods-programmatically.debug.xcconfig"; sourceTree = "<group>"; };
 		E5047F014E9F8404C063A343 /* Pods-programmatically.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-programmatically.release.xcconfig"; path = "Target Support Files/Pods-programmatically/Pods-programmatically.release.xcconfig"; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 		3A9DB598243CB3F400EAAD4A /* API */ = {
 			isa = PBXGroup;
 			children = (
+				3AE476F0244179680059F04F /* AuthService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				3A45A1932440A22E007E6F2B /* SignupViewModel.swift in Sources */,
 				3A3CCDCC2440C1A1005A6F76 /* Constracts.swift in Sources */,
 				3A3CCDCE2440C26E005A6F76 /* FIrestoreReference.swift in Sources */,
+				3AE476F1244179680059F04F /* AuthService.swift in Sources */,
 				3A9DB585243CB36400EAAD4A /* ViewController.swift in Sources */,
 				3A9DB59A243CB40F00EAAD4A /* ConvesationsController.swift in Sources */,
 				3A9DB581243CB36400EAAD4A /* AppDelegate.swift in Sources */,

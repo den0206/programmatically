@@ -148,44 +148,20 @@
         
         guard let profileImage = selectedImage else {return}
         
-        guard let imageData = profileImage.jpegData(compressionQuality: 0.3) else {return}
+        let credential = RegistrationCredentials(email: email, username: username, fullname: fullname, password: password, profileImage: profileImage)
         
-        let filename = UUID().uuidString
-        let ref = Storage.storage().reference(withPath: "ProfileImage/\(filename)")
-        
-        ref.putData(imageData, metadata: nil) { (meta, error) in
-            
+        AuthService.shared.signUpUser(credential: credential) { (error) in
             if error != nil {
                 print(error!.localizedDescription)
                 return
             }
             
-            ref.downloadURL { (url, error) in
-                
-                guard let profileImageUrl = url?.absoluteString else {return}
-                
-                Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
-                    
-                    if error != nil {
-                        print(error!.localizedDescription)
-                        return
-                    }
-                    
-                    guard let uid = result?.user.uid else {return}
-                    
-                    let values = [kEMAIL : email,
-                                  kFULLNAME : fullname,
-                                  kUSERNAME : username,
-                                  kAVATAR : profileImageUrl,
-                                  kUID : uid ] as [String : Any]
-                    
-                    print(values)
-                    
-                    firebaseReference(.User).document(uid).setData(values)
-                    
-                }
-            }
+            
+            self.dismiss(animated: true, completion: nil)
         }
+        
+        
+       
     }
     
     

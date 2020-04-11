@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 
 class LoginController : UIViewController {
@@ -47,6 +48,7 @@ class LoginController : UIViewController {
         button.backgroundColor = .systemGreen
         button.titleLabel?.textColor = .white
         button.isEnabled = false
+        button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         return button
     }()
     
@@ -96,8 +98,6 @@ class LoginController : UIViewController {
         emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
 
-        
-        
     }
     
     func checkFormStatus() {
@@ -108,6 +108,25 @@ class LoginController : UIViewController {
             loginButton.isEnabled = false
             loginButton.backgroundColor = .systemGreen
         }
+    }
+    
+    //MARK: - Actions
+    
+    @objc func handleLogin() {
+        guard let email = emailTextField.text else {return}
+        guard let password = passwordTextField.text else {return}
+        
+        AuthService.shared.loginUser(email: email, password: password) { (result, error) in
+            
+            if error != nil {
+                print(error!.localizedDescription)
+                return
+            }
+            
+            self.dismiss(animated: true, completion: nil)
+        }
+        
+
     }
     
     
