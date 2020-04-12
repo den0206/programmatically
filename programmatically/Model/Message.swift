@@ -29,3 +29,8 @@ struct Message {
     }
     
 }
+
+struct Recent {
+    let user : User
+    let message : Message
+}

@@ -34,6 +34,21 @@ struct Service {
         }
     }
     
+    static func fetchUser(userId : String, completion :  @escaping(User) -> Void) {
+        
+        firebaseReference(.User).document(userId).getDocument { (snapshot, error) in
+            
+            guard let snapshot = snapshot else {return}
+            
+            if snapshot.exists {
+                let dic = snapshot.data()
+                let user = User(dictionary: dic!)
+                
+                completion(user)
+            }
+        }
+    }
+    
     static func uploadMessage(_ message : String, toUser user: User,  completion : ((Error?) -> Void)?) {
         
         guard let currentUID = Auth.auth().currentUser?.uid else {return}
@@ -45,6 +60,13 @@ struct Service {
         
         firebaseReference(.Message).document(currentUID).collection(user.uid).addDocument(data: values) { (_) in
             firebaseReference(.Message).document(user.uid).collection(currentUID).addDocument(data: values, completion: completion)
+            
+            /// Recent
+            firebaseReference(.Message).document(currentUID).collection(Reference.Recent.rawValue).document(user.uid).setData(values)
+            firebaseReference(.Message).document(user.uid).collection(Reference.Recent.rawValue).document(currentUID).setData(values)
+
+            
+            
         }
 
     }
@@ -70,6 +92,35 @@ struct Service {
             }
             
             completion(messages)
+        }
+    }
+    
+    static func fetchRecent(completion :  @escaping([Recent]) -> Void) {
+        
+        var recents = [Recent]()
+        guard let currentUID = Auth.auth().currentUser?.uid else {return}
+        
+        let query = firebaseReference(.Message).document(currentUID).collection(Reference.Recent.rawValue).order(by: kTIMESTAMP)
+        
+        query.addSnapshotListener { (snapshot, error) in
+            
+            guard let snapshot = snapshot else {return}
+            
+            snapshot.documentChanges.forEach { (diff) in
+                
+                if diff.type == .added {
+                    
+                    let dic = diff.document.data()
+                    let message = Message(dictionary: dic)
+                    
+                    Service.fetchUser(userId: message.told) { (user) in
+                        let recent = Recent(user: user, message: message)
+                        recents.append(recent)
+                        completion(recents)
+                    }
+                    
+                }
+            }
         }
     }
 }

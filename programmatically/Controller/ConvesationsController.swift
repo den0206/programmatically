@@ -16,6 +16,12 @@ class ConvesationsController : UIViewController {
     
     private let tableView = UITableView()
     
+    private var recents = [Recent]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
     private let actionButton : UIButton = {
         let button = UIButton(type: .system)
         button.tintColor = .white
@@ -31,8 +37,6 @@ class ConvesationsController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         
         authenticateUser()
         
@@ -99,7 +103,15 @@ class ConvesationsController : UIViewController {
             configureNav(title: "Message", preferLargeTitle: true)
             convfigureTableview()
             configureUI()
+            
+            fetchRecent()
 
+        }
+    }
+    
+    private func fetchRecent() {
+        Service.fetchRecent { (recents) in
+            self.recents = recents
         }
     }
     
@@ -122,7 +134,7 @@ class ConvesationsController : UIViewController {
 
 extension ConvesationsController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return recents.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -135,7 +147,9 @@ extension ConvesationsController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
+        
+        let chatVC = ChatController(user: recents[indexPath.item].user)
+        navigationController?.pushViewController(chatVC, animated: true)
     }
     
     
