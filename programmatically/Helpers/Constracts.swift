@@ -8,9 +8,21 @@
 
 import Foundation
 
+//MARK: - User
+
 public let kUID = "uid"
 public let kEMAIL = "email"
 public let kPASSWORD = "password"
 public let kAVATAR = "avatar"
 public let kFULLNAME = "fullname"
 public let kUSERNAME = "username"
+
+//MARK: - Message
+
+public let kTEXT = "text"
+public let kTOLD = "told"
+public let kFROMID = "fromId"
+public let kTIMESTAMP = "timeStamp"
+public let kUSER = "user"
+
+

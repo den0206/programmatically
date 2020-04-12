@@ -8,7 +8,12 @@
 
 import UIKit
 
+protocol CustomInputAccesaryViewDelegate : class {
+    func inputView(_ inputview : CustomInputAccesaryView, message : String)
+}
+
 class CustomInputAccesaryView : UIView {
+    weak var delegate : CustomInputAccesaryViewDelegate?
     
     //MARK: - parts
     private lazy var messageInputTextView : UITextView = {
@@ -71,10 +76,16 @@ class CustomInputAccesaryView : UIView {
     
     //MARK: - Actions
     @objc func sendMessage() {
-        print("Send")
+        guard let message = messageInputTextView.text else {return}
+        delegate?.inputView(self, message: message)
     }
     
     @objc func handleTextInputChange() {
         placeholderLagel.isHidden = !self.messageInputTextView.text.isEmpty
+    }
+    
+    func clearMessageText() {
+        messageInputTextView.text = nil
+        placeholderLagel.isHidden = false
     }
 }

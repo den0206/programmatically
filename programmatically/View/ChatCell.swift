@@ -10,6 +10,15 @@ import UIKit
 
 class ChatCell : UICollectionViewCell {
     
+    var message : Message? {
+        didSet {
+            configure()
+        }
+    }
+    
+    var bubbleLeftAnchor : NSLayoutConstraint!
+    var bubbleRightAnchor : NSLayoutConstraint!
+    
     //MARK: - Parts
     
     private let profileImageView : UIImageView = {
@@ -22,20 +31,21 @@ class ChatCell : UICollectionViewCell {
         return iv
     }()
     
-    private let textView : UIView = {
+    private let textView : UITextView = {
         let tv = UITextView()
         tv.backgroundColor = .clear
         tv.font = UIFont.systemFont(ofSize: 16)
         tv.isScrollEnabled = false
         tv.isEditable = false
-        tv.text = "Test"
+//        tv.text = "Test"
         return tv
     }()
     
     private let bubbleContainer : UIView = {
         let view = UIView()
         view.backgroundColor = .lightGray
-        
+        view.layer.cornerRadius = 12
+
         return view
     }()
     
@@ -46,9 +56,14 @@ class ChatCell : UICollectionViewCell {
         profileImageView.anchor(left : leftAnchor,bottom: bottomAnchor,paddingLeft: 8,paddingBottom: -4)
         
         addSubview(bubbleContainer)
-        bubbleContainer.layer.cornerRadius = 12
-        bubbleContainer.anchor(top : topAnchor, left: profileImageView.rightAnchor,paddingLeft: 12)
+        bubbleContainer.anchor(top : topAnchor, bottom: bottomAnchor)
         bubbleContainer.widthAnchor.constraint(lessThanOrEqualToConstant: 250).isActive = true
+        
+        /// set property
+        bubbleLeftAnchor = bubbleContainer.leftAnchor.constraint(equalTo: profileImageView.rightAnchor, constant: 20)
+        bubbleLeftAnchor.isActive = false
+        bubbleRightAnchor = bubbleContainer.rightAnchor.constraint(equalTo: rightAnchor, constant: -12)
+        bubbleRightAnchor.isActive = false
         
         addSubview(textView)
         textView.anchor(top : bubbleContainer.topAnchor, left:  bubbleContainer.leftAnchor, bottom: bubbleContainer.bottomAnchor, right: bubbleContainer.rightAnchor,paddingTop: 4,paddingLeft: 12,paddingBottom: 4,paddingRight: 12)
@@ -56,5 +71,23 @@ class ChatCell : UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func configure() {
+        guard let message = message else {return}
+        let vm = MessageViewModel(message: message)
+        
+        textView.text = message.text
+        
+        bubbleContainer.backgroundColor = vm.messageBackGroungColor
+        textView.textColor = vm.messageTextColor
+        
+        bubbleLeftAnchor.isActive = vm.leftAnchorIsActive
+        bubbleRightAnchor.isActive = vm.rightAnchorIsActive
+        profileImageView.isHidden = vm.shouldHideProfileImage
+        profileImageView.sd_setImage(with: vm.profileImageUrl)
+        
+        
+        
     }
 }

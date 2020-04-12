@@ -26,6 +26,8 @@
 		3AB915B1243E0564003A2A29 /* SignupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB915B0243E0564003A2A29 /* SignupController.swift */; };
 		3AC08A242441C2150036AEC7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC08A232441C2150036AEC7 /* User.swift */; };
 		3AC08A262441C2840036AEC7 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC08A252441C2840036AEC7 /* Service.swift */; };
+		3ADAEB5F2442AFAE00B3A04E /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADAEB5E2442AFAE00B3A04E /* Message.swift */; };
+		3ADAEB612442B26F00B3A04E /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADAEB602442B26F00B3A04E /* MessageViewModel.swift */; };
 		3AE476F1244179680059F04F /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE476F0244179680059F04F /* AuthService.swift */; };
 		3AE476F324418C2D0059F04F /* NewMessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE476F224418C2D0059F04F /* NewMessagesController.swift */; };
 		3AE476F5244190E60059F04F /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE476F4244190E60059F04F /* UserCell.swift */; };
@@ -54,6 +56,8 @@
 		3AB915B0243E0564003A2A29 /* SignupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupController.swift; sourceTree = "<group>"; };
 		3AC08A232441C2150036AEC7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		3AC08A252441C2840036AEC7 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		3ADAEB5E2442AFAE00B3A04E /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		3ADAEB602442B26F00B3A04E /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
 		3AE476F0244179680059F04F /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		3AE476F224418C2D0059F04F /* NewMessagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessagesController.swift; sourceTree = "<group>"; };
 		3AE476F4244190E60059F04F /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
@@ -156,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				3AC08A232441C2150036AEC7 /* User.swift */,
+				3ADAEB5E2442AFAE00B3A04E /* Message.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -165,6 +170,7 @@
 			children = (
 				3AF05E6B243F5DB100E9AAF3 /* LoginViewModel.swift */,
 				3A45A1922440A22E007E6F2B /* SignupViewModel.swift */,
+				3ADAEB602442B26F00B3A04E /* MessageViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -314,6 +320,7 @@
 				3A45A1932440A22E007E6F2B /* SignupViewModel.swift in Sources */,
 				3A3CCDCC2440C1A1005A6F76 /* Constracts.swift in Sources */,
 				3A56C1CC2442191B00CFF2F6 /* ChatCell.swift in Sources */,
+				3ADAEB612442B26F00B3A04E /* MessageViewModel.swift in Sources */,
 				3A3CCDCE2440C26E005A6F76 /* FIrestoreReference.swift in Sources */,
 				3AE476F1244179680059F04F /* AuthService.swift in Sources */,
 				3A9DB585243CB36400EAAD4A /* ViewController.swift in Sources */,
@@ -327,6 +334,7 @@
 				3AB915B1243E0564003A2A29 /* SignupController.swift in Sources */,
 				3A56C1C82441E99900CFF2F6 /* ChatController.swift in Sources */,
 				3AB915AF243E0558003A2A29 /* LoginController.swift in Sources */,
+				3ADAEB5F2442AFAE00B3A04E /* Message.swift in Sources */,
 				3A1293E9243E07FC00DA8C17 /* Extensions.swift in Sources */,
 				3A56C1CA2441EF1B00CFF2F6 /* CustomInputAccesaryView.swift in Sources */,
 			);
