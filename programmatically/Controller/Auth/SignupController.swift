@@ -9,14 +9,13 @@
  import UIKit
  import Firebase
  
- protocol AuthentificationControllerProtocol {
-    func checkFormStatus()
- }
 
 
  class SignupController : UIViewController {
     
     private var viewModel = SignupViewModel()
+    
+    weak var delegate : AuthentificationDelegate?
     
     var selectedImage : UIImage?
     
@@ -164,7 +163,7 @@
             
             
             self.showLoader(false)
-            self.dismiss(animated: true, completion: nil)
+            self.delegate?.authentificationComplete()
         }
         
         

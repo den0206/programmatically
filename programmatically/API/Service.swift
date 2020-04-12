@@ -10,26 +10,33 @@ import Firebase
 
 struct Service {
     static  func fetchUsers(completion :  @escaping([User]) -> Void) {
-        
-        var users = [User]()
+    
         firebaseReference(.User).getDocuments { (snapshot, error) in
             
             guard let snapshot = snapshot else {return}
             
-            if !snapshot.isEmpty {
-                snapshot.documents.forEach { (documet) in
-                    
-                    let dictionary  = documet.data()
-                    let user = User(dictionary: dictionary)
-                    
-                    if user.uid != Auth.auth().currentUser?.uid {
-                        users.append(user)
-                    }
-                    
-                }
-                
-                completion(users)
+            var users = snapshot.documents.map({ User(dictionary: $0.data())})
+            
+            /// remove current user
+            if let i = users.firstIndex(where: {$0.uid == Auth.auth().currentUser?.uid}) {
+                users.remove(at: i)
             }
+            completion(users)
+            
+//            if !snapshot.isEmpty {
+//                snapshot.documents.forEach { (documet) in
+//
+//                    let dictionary  = documet.data()
+//                    let user = User(dictionary: dictionary)
+//
+//                    if user.uid != Auth.auth().currentUser?.uid {
+//                        users.append(user)
+//                    }
+//
+//                }
+//
+//                completion(users)
+//            }
             
         }
     }
@@ -97,30 +104,58 @@ struct Service {
     
     static func fetchRecent(completion :  @escaping([Recent]) -> Void) {
         
-        var recents = [Recent]()
+       
         guard let currentUID = Auth.auth().currentUser?.uid else {return}
         
         let query = firebaseReference(.Message).document(currentUID).collection(Reference.Recent.rawValue).order(by: kTIMESTAMP)
         
         query.addSnapshotListener { (snapshot, error) in
             
+            var recents = [Recent]()
+            
             guard let snapshot = snapshot else {return}
             
-            snapshot.documentChanges.forEach { (diff) in
+            snapshot.documents.forEach { (document) in
                 
-                if diff.type == .added {
-                    
-                    let dic = diff.document.data()
-                    let message = Message(dictionary: dic)
-                    
-                    Service.fetchUser(userId: message.told) { (user) in
-                        let recent = Recent(user: user, message: message)
-                        recents.append(recent)
-                        completion(recents)
-                    }
-                    
+                let dic = document.data()
+                let message = Message(dictionary: dic)
+                
+                Service.fetchUser(userId: message.chatPartnerId) { (user) in
+                    let recent = Recent(user: user, message: message)
+                    recents.append(recent)
+                    completion(recents)
                 }
+                
+                
             }
+            
+//            snapshot.documentChanges.forEach { (diff) in
+//
+//                if diff.type == .added {
+//
+//                    let dic = diff.document.data()
+//                    let message = Message(dictionary: dic)
+//
+//                    Service.fetchUser(userId: message.told) { (user) in
+//                        let recent = Recent(user: user, message: message)
+//                        recents.append(recent)
+//                        completion(recents)
+//                    }
+//
+//                }
+//
+//                if diff.type == .modified {
+//                    /// upload lastMessae
+//                    let dic = diff.document.data()
+//                    let message = Message(dictionary: dic)
+//
+//                    Service.fetchUser(userId: message.told) { (user) in
+//                        let recent = Recent(user: user, message: message)
+//                        recents.append(recent)
+//                        completion(recents)
+//                    }
+//                }
+//            }
         }
     }
 }

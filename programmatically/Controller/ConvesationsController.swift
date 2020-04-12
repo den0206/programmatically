@@ -21,6 +21,7 @@ class ConvesationsController : UIViewController {
             tableView.reloadData()
         }
     }
+    private var recentsDictionary = [String : Recent]()
     
     private let actionButton : UIButton = {
         let button = UIButton(type: .system)
@@ -58,6 +59,12 @@ class ConvesationsController : UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+          configureNav(title: "Message", preferLargeTitle: true)
+    }
+    
     private func convfigureTableview() {
         tableView.backgroundColor = .white
         tableView.rowHeight = 80
@@ -65,7 +72,7 @@ class ConvesationsController : UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifer)
+        tableView.register(RecentCell.self, forCellReuseIdentifier: reuseIdentifer)
         view.addSubview(tableView)
         tableView.frame = view.frame
     }
@@ -94,13 +101,14 @@ class ConvesationsController : UIViewController {
             
             DispatchQueue.main.async {
                 let loginVC = LoginController()
+                loginVC.delegate = self
                 let nav = UINavigationController(rootViewController: loginVC)
                 nav.modalPresentationStyle = .fullScreen
                 self.present(nav, animated: true, completion: nil)
             }
 
         } else {
-            configureNav(title: "Message", preferLargeTitle: true)
+          
             convfigureTableview()
             configureUI()
             
@@ -111,7 +119,16 @@ class ConvesationsController : UIViewController {
     
     private func fetchRecent() {
         Service.fetchRecent { (recents) in
-            self.recents = recents
+            
+            
+            /// fix dublicate Recents
+            recents.forEach { (recent) in
+                let message = recent.message
+                self.recentsDictionary[message.chatPartnerId] = recent
+            }
+
+            self.recents = Array(self.recentsDictionary.values)
+            
         }
     }
     
@@ -121,6 +138,7 @@ class ConvesationsController : UIViewController {
             
             DispatchQueue.main.async {
                 let loginVC = LoginController()
+                loginVC.delegate = self
                 let nav = UINavigationController(rootViewController: loginVC)
                 nav.modalPresentationStyle = .fullScreen
                 self.present(nav, animated: true, completion: nil)
@@ -138,15 +156,16 @@ extension ConvesationsController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifer, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifer, for: indexPath) as! RecentCell
         
-        cell.detailTextLabel?.text = "Test"
+        cell.recent = recents[indexPath.row]
         
         return cell
         
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
         let chatVC = ChatController(user: recents[indexPath.item].user)
         navigationController?.pushViewController(chatVC, animated: true)
@@ -163,6 +182,19 @@ extension ConvesationsController : NewMessagesControllerDelegate {
         let chatVC = ChatController(user: user)
         navigationController?.pushViewController(chatVC, animated: true)
         
+    }
+    
+    
+}
+
+extension ConvesationsController : AuthentificationDelegate {
+    /// after Authentification bug
+    func authentificationComplete() {
+        /// dismiss Auth Pages
+        dismiss(animated: true, completion: nil)
+        authenticateUser()
+//        configureUI()
+//        fetchRecent()
     }
     
     

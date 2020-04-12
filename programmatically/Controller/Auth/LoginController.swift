@@ -9,11 +9,20 @@
 import UIKit
 import Firebase
 
+protocol AuthentificationControllerProtocol {
+   func checkFormStatus()
+}
+
+protocol AuthentificationDelegate : class {
+   func authentificationComplete()
+}
 
 
 class LoginController : UIViewController {
     
     private var viewModel = LoginViewModel()
+    
+    var delegate : AuthentificationDelegate?
     //MARK: - Parts
     
     private let iconImage : UIImageView = {
@@ -126,10 +135,8 @@ class LoginController : UIViewController {
                 return
             }
             
-            self.dismiss(animated: true, completion: {
-                self.showLoader(false)
-
-            })
+            self.showLoader(false)
+            self.delegate?.authentificationComplete()
         }
         
 
@@ -185,6 +192,8 @@ class LoginController : UIViewController {
     @objc func handleSignUp() {
         
         let signUpVC = SignupController()
+        /// fix bug
+        signUpVC.delegate = delegate
         navigationController?.pushViewController(signUpVC, animated: true)
     }
     

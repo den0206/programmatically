@@ -13,6 +13,7 @@
 		3A3CCDCE2440C26E005A6F76 /* FIrestoreReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3CCDCD2440C26E005A6F76 /* FIrestoreReference.swift */; };
 		3A3CCDD62440C8D1005A6F76 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A3CCDD52440C8D1005A6F76 /* GoogleService-Info.plist */; };
 		3A45A1932440A22E007E6F2B /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A45A1922440A22E007E6F2B /* SignupViewModel.swift */; };
+		3A55D5CB2442EC5D00F31251 /* RecentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A55D5CA2442EC5D00F31251 /* RecentCell.swift */; };
 		3A56C1C82441E99900CFF2F6 /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A56C1C72441E99900CFF2F6 /* ChatController.swift */; };
 		3A56C1CA2441EF1B00CFF2F6 /* CustomInputAccesaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A56C1C92441EF1B00CFF2F6 /* CustomInputAccesaryView.swift */; };
 		3A56C1CC2442191B00CFF2F6 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A56C1CB2442191B00CFF2F6 /* ChatCell.swift */; };
@@ -24,6 +25,7 @@
 		3A9DB59A243CB40F00EAAD4A /* ConvesationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9DB599243CB40F00EAAD4A /* ConvesationsController.swift */; };
 		3AB915AF243E0558003A2A29 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB915AE243E0558003A2A29 /* LoginController.swift */; };
 		3AB915B1243E0564003A2A29 /* SignupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB915B0243E0564003A2A29 /* SignupController.swift */; };
+		3ABC2C09244357A900C026A2 /* RecentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABC2C08244357A900C026A2 /* RecentViewModel.swift */; };
 		3AC08A242441C2150036AEC7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC08A232441C2150036AEC7 /* User.swift */; };
 		3AC08A262441C2840036AEC7 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC08A252441C2840036AEC7 /* Service.swift */; };
 		3ADAEB5F2442AFAE00B3A04E /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADAEB5E2442AFAE00B3A04E /* Message.swift */; };
@@ -41,6 +43,7 @@
 		3A3CCDCD2440C26E005A6F76 /* FIrestoreReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIrestoreReference.swift; sourceTree = "<group>"; };
 		3A3CCDD52440C8D1005A6F76 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3A45A1922440A22E007E6F2B /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
+		3A55D5CA2442EC5D00F31251 /* RecentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentCell.swift; sourceTree = "<group>"; };
 		3A56C1C72441E99900CFF2F6 /* ChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
 		3A56C1C92441EF1B00CFF2F6 /* CustomInputAccesaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputAccesaryView.swift; sourceTree = "<group>"; };
 		3A56C1CB2442191B00CFF2F6 /* ChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
@@ -54,6 +57,7 @@
 		3A9DB599243CB40F00EAAD4A /* ConvesationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvesationsController.swift; sourceTree = "<group>"; };
 		3AB915AE243E0558003A2A29 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		3AB915B0243E0564003A2A29 /* SignupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupController.swift; sourceTree = "<group>"; };
+		3ABC2C08244357A900C026A2 /* RecentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentViewModel.swift; sourceTree = "<group>"; };
 		3AC08A232441C2150036AEC7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		3AC08A252441C2840036AEC7 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		3ADAEB5E2442AFAE00B3A04E /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -152,6 +156,7 @@
 				3AE476F4244190E60059F04F /* UserCell.swift */,
 				3A56C1C92441EF1B00CFF2F6 /* CustomInputAccesaryView.swift */,
 				3A56C1CB2442191B00CFF2F6 /* ChatCell.swift */,
+				3A55D5CA2442EC5D00F31251 /* RecentCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -171,6 +176,7 @@
 				3AF05E6B243F5DB100E9AAF3 /* LoginViewModel.swift */,
 				3A45A1922440A22E007E6F2B /* SignupViewModel.swift */,
 				3ADAEB602442B26F00B3A04E /* MessageViewModel.swift */,
+				3ABC2C08244357A900C026A2 /* RecentViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -324,6 +330,7 @@
 				3A3CCDCE2440C26E005A6F76 /* FIrestoreReference.swift in Sources */,
 				3AE476F1244179680059F04F /* AuthService.swift in Sources */,
 				3A9DB585243CB36400EAAD4A /* ViewController.swift in Sources */,
+				3A55D5CB2442EC5D00F31251 /* RecentCell.swift in Sources */,
 				3AE476F5244190E60059F04F /* UserCell.swift in Sources */,
 				3A9DB59A243CB40F00EAAD4A /* ConvesationsController.swift in Sources */,
 				3AC08A242441C2150036AEC7 /* User.swift in Sources */,
@@ -331,6 +338,7 @@
 				3A9DB581243CB36400EAAD4A /* AppDelegate.swift in Sources */,
 				3A9DB583243CB36400EAAD4A /* SceneDelegate.swift in Sources */,
 				3AF05E6C243F5DB100E9AAF3 /* LoginViewModel.swift in Sources */,
+				3ABC2C09244357A900C026A2 /* RecentViewModel.swift in Sources */,
 				3AB915B1243E0564003A2A29 /* SignupController.swift in Sources */,
 				3A56C1C82441E99900CFF2F6 /* ChatController.swift in Sources */,
 				3AB915AF243E0558003A2A29 /* LoginController.swift in Sources */,

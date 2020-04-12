@@ -16,6 +16,10 @@ struct Message {
     var user : User?
     let isFromCurrentUser : Bool
     
+    var chatPartnerId : String {
+        return isFromCurrentUser ? told : fromId
+    }
+    
     init(dictionary : [String :Any]) {
         self.text = dictionary[kTEXT] as? String ?? ""
         self.told = dictionary[kTOLD] as? String ?? ""
