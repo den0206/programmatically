@@ -68,7 +68,10 @@ class ChatController : UICollectionViewController {
     //MARK: - API
     
     func fetchMessages() {
+        showLoader(true)
+        
         Service.fetchMessage(forUser: user) { (messages) in
+            self.showLoader(false)
             self.messages = messages
             
             /// Scroll To Bottom

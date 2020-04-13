@@ -156,8 +156,8 @@
         
         AuthService.shared.signUpUser(credential: credential) { (error) in
             if error != nil {
-                print(error!.localizedDescription)
                 self.showLoader(false)
+                self.showError(error!.localizedDescription)
                 return
             }
             

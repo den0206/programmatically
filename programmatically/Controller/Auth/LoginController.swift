@@ -130,8 +130,8 @@ class LoginController : UIViewController {
         AuthService.shared.loginUser(email: email, password: password) { (result, error) in
             
             if error != nil {
-                print(error!.localizedDescription)
                 self.showLoader(false)
+                self.showError(error!.localizedDescription)
                 return
             }
             

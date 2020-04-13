@@ -118,14 +118,17 @@ class ConvesationsController : UIViewController {
     }
     
     private func fetchRecent() {
+        
+        showLoader(true)
         Service.fetchRecent { (recents) in
-            
             
             /// fix dublicate Recents
             recents.forEach { (recent) in
                 let message = recent.message
                 self.recentsDictionary[message.chatPartnerId] = recent
             }
+            
+            self.showLoader(false)
 
             self.recents = Array(self.recentsDictionary.values)
             
